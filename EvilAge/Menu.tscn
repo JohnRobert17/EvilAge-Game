@@ -1,0 +1,85 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Animations/EnemyClassC.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Animations/PlayerAnimation.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Menu.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_000.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_001.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_004.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/menu/play.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_006.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/menu/prize.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_009.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_002.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menu/setting.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_007.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_003.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_010.png" type="Texture" id=15]
+[ext_resource path="res://assets/background/Menu.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menu/about.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_005.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_008.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/Golem1/Idle/Golem_01_Idle_011.png" type="Texture" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 6 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 19 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Menu" type="Sprite" parent="."]
+position = Vector2( 604.139, 300.979 )
+scale = Vector2( 0.951005, 0.872534 )
+texture = ExtResource( 16 )
+
+[node name="AnimatedSprite3" type="AnimatedSprite" parent="."]
+position = Vector2( 1066.79, 364.089 )
+scale = Vector2( -1.01249, 1.05619 )
+frames = SubResource( 1 )
+frame = 2
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 113.712, 473.322 )
+scale = Vector2( 0.437708, 0.4 )
+frames = ExtResource( 2 )
+animation = "idle"
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 1155.1, 462.79 )
+rotation = 3.14159
+scale = Vector2( 0.4, -0.4 )
+frames = ExtResource( 1 )
+animation = "idle"
+frame = 1
+playing = true
+
+[node name="Play" type="TouchScreenButton" parent="."]
+position = Vector2( 216, 416 )
+scale = Vector2( 0.3, 0.3 )
+normal = ExtResource( 7 )
+
+[node name="Leaderboard" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 396, 416 )
+scale = Vector2( 0.496032, 0.501892 )
+normal = ExtResource( 9 )
+
+[node name="About" type="TouchScreenButton" parent="."]
+position = Vector2( 576, 416 )
+scale = Vector2( 0.493932, 0.501891 )
+normal = ExtResource( 17 )
+
+[node name="Settings" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 746, 416 )
+scale = Vector2( 0.498131, 0.497706 )
+normal = ExtResource( 12 )
+[connection signal="pressed" from="Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="About" to="." method="_on_About_pressed"]

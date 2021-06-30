@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Animations/PlayerAnimation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.gd" type="Script" id=19]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 81.1465, 283.126 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 223.368
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 152.397, 12.5804 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 15 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "idle"
+frame = 10
+playing = true
+
+[node name="SlashHit" type="Area2D" parent="Sprite" groups=[
+"Slash",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SlashHit"]
+position = Vector2( 220.146, 56.3744 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+
+[node name="PlayerHitbox" type="Area2D" parent="." groups=[
+"hitbox",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
+position = Vector2( -2.6741, 94.0964 )
+shape = SubResource( 3 )
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2( 0.5, 1 )
+
+[node name="HealthBar" parent="Node2D" instance=ExtResource( 2 )]
+margin_left = -769.817
+margin_top = -371.909
+margin_right = -769.817
+margin_bottom = -371.909
+
+[node name="GroundArea" type="CollisionShape2D" parent="."]
+position = Vector2( -5.5025, 296.329 )
+shape = SubResource( 3 )
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="area_entered" from="Sprite/SlashHit" to="." method="_on_SlashHit_area_entered"]
+[connection signal="area_entered" from="PlayerHitbox" to="." method="_on_PlayerHitbox_area_entered"]
