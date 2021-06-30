@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Animations/EnemyClassC.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://EnemyClassC.gd" type="Script" id=19]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 101.13
+height = 0.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 164.857, 48.7307 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 169, 44 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 152.397, 12.5804 )
+
+[node name="EnemyClassC" type="Area2D"]
+scale = Vector2( 0.17, 0.17 )
+script = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.78174, 51.6721 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "kicking"
+frame = 8
+playing = true
+
+[node name="slash_area" type="Area2D" parent="Sprite" groups=[
+"enemy_slash",
+]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/slash_area"]
+position = Vector2( 162.143, 56.7307 )
+shape = SubResource( 2 )
+
+[node name="slash_damage" type="Area2D" parent="Sprite" groups=[
+"EnemyDamage",
+"MeleeC",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/slash_damage"]
+position = Vector2( 158, 58 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="GroundArea" type="CollisionShape2D" parent="."]
+position = Vector2( 20.1761, 291.66 )
+shape = SubResource( 4 )
+
+[connection signal="area_entered" from="." to="." method="_on_EnemyClassC_area_entered"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="area_entered" from="Sprite/slash_area" to="." method="_on_slash_area_area_entered"]
+[connection signal="area_exited" from="Sprite/slash_area" to="." method="_on_slash_area_area_exited"]
+[connection signal="area_entered" from="Sprite/slash_damage" to="." method="_on_slash_damage_area_entered"]

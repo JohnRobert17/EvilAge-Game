@@ -1,0 +1,154 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://EnemyClassC.tscn" type="PackedScene" id=1]
+[ext_resource path="res://FunctionButtons.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Joystick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/background/game_background_1.png" type="Texture" id=5]
+[ext_resource path="res://Level1.gd" type="Script" id=6]
+[ext_resource path="res://assets/ui/buttons/restart.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/buttons/close.png" type="Texture" id=8]
+[ext_resource path="res://EnemyClassB.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3869.09, 14.5455 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 210.909, 29.0909 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 327.273, 21.8182 )
+
+[node name="Level1" type="Node2D"]
+scale = Vector2( 1.1, 1.1 )
+script = ExtResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Joystick" parent="CanvasLayer" instance=ExtResource( 4 )]
+position = Vector2( 136, 464 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="FunctionButtons" parent="CanvasLayer" instance=ExtResource( 2 )]
+modulate = Color( 1, 1, 1, 0.380392 )
+position = Vector2( 904, 288 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="Reset" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 984, 24 )
+scale = Vector2( 0.388785, 0.372093 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 7 )
+
+[node name="Back" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2( 1072, 24 )
+scale = Vector2( 0.388785, 0.372093 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 8 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 248, 253 )
+scale = Vector2( 0.2, 0.2 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_bottom = 650
+drag_margin_h_enabled = true
+smoothing_enabled = true
+drag_margin_top = 0.3
+drag_margin_right = 0.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2( 2145, 0 )
+
+[node name="game_background_1" type="Sprite" parent="ParallaxBackground/Background"]
+position = Vector2( 688, 347 )
+scale = Vector2( 0.28, 0.32 )
+texture = ExtResource( 5 )
+offset = Vector2( -545.709, 0 )
+
+[node name="game_background_2" type="Sprite" parent="ParallaxBackground/Background"]
+position = Vector2( 1456, 347 )
+scale = Vector2( -0.28, 0.32 )
+texture = ExtResource( 5 )
+offset = Vector2( -545.709, 0 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 3098.18, 130.909 )
+scale = Vector2( 1, -1 )
+shape = SubResource( 1 )
+one_way_collision = true
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 3105.45, 545.455 )
+shape = SubResource( 1 )
+one_way_collision = true
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 6945.46, 349.091 )
+rotation = 4.71239
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="BackBorder" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BackBorder"]
+position = Vector2( 152.727, 334.545 )
+rotation = 1.5708
+shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="EnemyClassB" parent="." instance=ExtResource( 9 )]
+position = Vector2( 804.323, 379.388 )
+
+[node name="EnemyClassB2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 6815.09, 429.31 )
+
+[node name="EnemyClassB3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 6530.21, 254.264 )
+
+[node name="EnemyClassB4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 4697.3, 345.22 )
+
+[node name="EnemyClassB5" parent="." instance=ExtResource( 9 )]
+position = Vector2( 3816.99, 379.542 )
+
+[node name="EnemyClassB6" parent="." instance=ExtResource( 9 )]
+position = Vector2( 2464.67, 206.213 )
+
+[node name="EnemyClassC" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1909.11, 214.793 )
+
+[node name="EnemyClassC2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1648.26, 456.768 )
+
+[node name="EnemyClassC3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 2915.7, 456.768 )
+
+[node name="EnemyClassC4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 3389.35, 204.497 )
+
+[node name="EnemyClassC5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4450.99, 197.632 )
+
+[node name="EnemyClassC6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5230.12, 173.606 )
+
+[node name="EnemyClassC7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 5238.7, 388.123 )
+
+[node name="EnemyClassC8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 6187.67, 211.361 )
+
+[node name="EnemyClassC9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 6599.54, 396.704 )
+[connection signal="pressed" from="CanvasLayer/Reset" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_Back_pressed"]
