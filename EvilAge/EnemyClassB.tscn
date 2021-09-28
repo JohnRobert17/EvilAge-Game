@@ -1,17 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://EnemyClassB.gd" type="Script" id=1]
 [ext_resource path="res://Animations/EnemyClassB.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 101.13
 height = 0.0
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 164.857, 48.7307 )
+extents = Vector2( 98.9369, 42.0799 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 169, 44 )
+extents = Vector2( 102, 44 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 152.397, 12.5804 )
@@ -27,13 +28,12 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "kicking"
-frame = 2
+frame = 7
 playing = true
 
 [node name="slash_area" type="Area2D" parent="Sprite" groups=[
 "enemy_slash",
 ]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/slash_area"]
 position = Vector2( 162.143, 56.7307 )
@@ -45,13 +45,22 @@ shape = SubResource( 2 )
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/slash_damage"]
-position = Vector2( 158, 58 )
+position = Vector2( 161.709, 58 )
 shape = SubResource( 3 )
 disabled = true
 
 [node name="GroundArea" type="CollisionShape2D" parent="."]
 position = Vector2( 9.23766, 205.62 )
 shape = SubResource( 4 )
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2( 0.3, 0.6 )
+
+[node name="HealthBar" parent="Node2D" instance=ExtResource( 3 )]
+margin_left = -769.817
+margin_top = -371.909
+margin_right = -769.817
+margin_bottom = -371.909
 
 [connection signal="area_entered" from="." to="." method="_on_EnemyClassC_area_entered"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]

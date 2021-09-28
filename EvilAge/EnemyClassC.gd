@@ -2,7 +2,8 @@ extends Area2D
 
 var dead = false
 var hurt = false
-var health = 100
+var maxHealth = 100
+var health = maxHealth
 var player_position
 var velocity: Vector2 = Vector2()
 var attacking = false
@@ -48,6 +49,7 @@ func _physics_process(delta):
 				counter = 0
 			else: counter += 1
 	elif (hurt):
+		$Sprite.play("hurt")
 		if (get_position().x > player_position.x + 20): velocity.x = + SPEED
 		if (get_position().x < player_position.x - 20): velocity.x = - SPEED
 		position.x += velocity.x
@@ -67,6 +69,8 @@ func _on_EnemyClassC_area_entered(area):
 			$Sprite.play("hurt")
 			health -= 50
 			hurt = true
+			var healthPoint = (float(health)/(maxHealth)*100)
+			$Node2D/HealthBar._on_health_updated(healthPoint, 10)
 			print(health)
 		if (health <= 0):
 			$Sprite.play("dying")

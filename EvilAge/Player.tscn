@@ -23,7 +23,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 10
+frame = 6
 playing = true
 
 [node name="SlashHit" type="Area2D" parent="Sprite" groups=[

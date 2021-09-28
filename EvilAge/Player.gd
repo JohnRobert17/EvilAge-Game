@@ -1,7 +1,8 @@
 extends KinematicBody2D
 const SPEED = 250
-var health = 200;
-var isAlive = true;
+var maxHealth = 200
+var health = maxHealth
+var isAlive = true
 var velocity: Vector2 = Vector2()
 var isPlayerAttacking = false
 onready var joystick = $"/root/Global".joystick
@@ -94,6 +95,8 @@ func _on_PlayerHitbox_area_entered(area):
 	if (isAlive):
 		if (area.is_in_group("EnemyDamage")):
 			if (area.is_in_group("MeleeC")): health -= 10
+			var healthPoint = (float(health)/(maxHealth)*100)
+			$Node2D/HealthBar._on_health_updated(healthPoint, 10)
 			hurt()
 
 func hurt():
