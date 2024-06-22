@@ -3,7 +3,8 @@
 It's a game where you smack orcs and ogres.
 
 **Current Status**: Unfinished
-you can find the game here: https://johnrobert17.itch.io/evil-age
+
+You can find the game here: https://johnrobert17.itch.io/evil-age
 
 **Feel free to copy!** I encourage anyone to learn from this code.
 
