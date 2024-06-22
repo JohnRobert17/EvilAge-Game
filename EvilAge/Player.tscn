@@ -23,7 +23,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 6
+frame = 1
 playing = true
 
 [node name="SlashHit" type="Area2D" parent="Sprite" groups=[
@@ -47,6 +47,7 @@ shape = SubResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2( 0.5, 1 )
+z_index = 4096
 
 [node name="HealthBar" parent="Node2D" instance=ExtResource( 2 )]
 margin_left = -769.817

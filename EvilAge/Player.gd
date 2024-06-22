@@ -1,5 +1,5 @@
 extends KinematicBody2D
-const SPEED = 250
+const SPEED = 250 #* 3
 var maxHealth = 200
 var health = maxHealth
 var isAlive = true

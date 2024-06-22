@@ -28,7 +28,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "kicking"
-frame = 7
+frame = 10
 playing = true
 
 [node name="slash_area" type="Area2D" parent="Sprite" groups=[

@@ -2,7 +2,7 @@ extends Area2D
 
 var dead = false
 var hurt = false
-var maxHealth = 500
+var maxHealth = 250
 var health = maxHealth
 var player_position
 var velocity: Vector2 = Vector2()
@@ -12,11 +12,13 @@ var player_in_range = false
 var counter = 0
 var uniqueAttribute = rand_range(0.5, 1.5)
 var SPEED = 0.7 * uniqueAttribute
+var hurtDelta = 0;
 
 func _physics_process(delta):
 	if (!$"/root/Global".player.isAlive):
 		$Sprite.play("idle")
 	elif (dead == true): 
+		attacking = false
 		$Sprite/slash_damage/CollisionShape2D.disabled = true;
 		$Sprite.play("dying")
 		if (death_count > 0):
@@ -44,15 +46,16 @@ func _physics_process(delta):
 			else: $Sprite.play("idle")
 		elif ((player_in_range == true) and (attacking == false)) : attack()
 		elif (attacking):
-			if (counter >= 25): 
+			if (counter == 25): 
 				$Sprite/slash_damage/CollisionShape2D.disabled = false
-				counter = 0
 			else: counter += 1
 	elif (hurt):
+		hurtDelta += 1
 		$Sprite.play("hurt")
 		if (get_position().x > player_position.x + 20): velocity.x = + SPEED
 		if (get_position().x < player_position.x - 20): velocity.x = - SPEED
 		position.x += velocity.x
+		if (hurtDelta > 37): hurt = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -80,11 +83,12 @@ func _on_EnemyClassC_area_entered(area):
 
 func _on_Sprite_animation_finished():
 	if ($Sprite.animation == "hurt"): 
+		hurtDelta = 0
 		hurt = false
 		attacking = false
 	elif ($Sprite.animation == "slashing"): 
-		hurt = false
 		attacking = false
+		counter = 0
 		$Sprite/slash_damage/CollisionShape2D.disabled = true;
 		
 

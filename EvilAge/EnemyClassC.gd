@@ -17,6 +17,7 @@ func _physics_process(delta):
 	if (!$"/root/Global".player.isAlive):
 		$Sprite.play("idle")
 	elif (dead == true): 
+		attacking = false
 		$Sprite/slash_damage/CollisionShape2D.disabled = true;
 		$Sprite.play("dying")
 		if (death_count > 0):
